@@ -395,3 +395,52 @@ body {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+/* Timeline (Experience page) */
+.timeline {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  border-left: 1px solid var(--border);
+  padding-left: 1.75rem;
+  margin-left: 0.5rem;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: calc(-1.75rem - 6px);
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.15);
+}
+
+.timeline-period {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-2);
+}
+
+.timeline-role {
+  margin: 0.3rem 0 0.1rem;
+  font-size: 1.2rem;
+}
+
+.timeline-place {
+  color: var(--text);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-text {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
