@@ -1,37 +1,50 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/experience", label: "Experience" },
-  { href: "/projects", label: "Projects" },
-  { href: "/contact", label: "Contact" },
+const sections = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "experience", label: "Experience" },
+  { id: "projects", label: "Projects" },
+  { id: "contact", label: "Contact" },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const [active, setActive] = useState("home");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <header className="nav">
-      <div className="nav-inner">
-        <Link href="/" className="nav-logo">
-          Diya Limbani
-        </Link>
-        <nav className="nav-links">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={pathname === link.href ? "nav-link active" : "nav-link"}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
-    </header>
+    <nav className="scroll-nav" aria-label="Section navigation">
+      {sections.map((s) => (
+        <a
+          key={s.id}
+          href={`#${s.id}`}
+          className={active === s.id ? "scroll-dot active" : "scroll-dot"}
+          aria-label={s.label}
+          aria-current={active === s.id ? "true" : undefined}
+        >
+          <span className="scroll-dot-label">{s.label}</span>
+          <span className="scroll-dot-mark" />
+        </a>
+      ))}
+    </nav>
   );
 }

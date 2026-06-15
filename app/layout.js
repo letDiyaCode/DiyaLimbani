@@ -1,5 +1,7 @@
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import NetworkBackground from "../components/NetworkBackground";
+import CursorFX from "../components/CursorFX";
 
 export const metadata = {
   title: "Diya Limbani",
@@ -10,7 +12,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <div className="bg-glow" aria-hidden="true" />
+        <NetworkBackground variant="glow" />
+        <CursorFX variant="glow" />
         <Navbar />
         <main className="page">{children}</main>
         <footer className="footer">
